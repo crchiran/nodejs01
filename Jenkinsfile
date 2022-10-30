@@ -14,6 +14,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
+                echo ' Deploying..'
                 //sudo sh './jenkins/scripts/deliver.sh'
             }
         }
