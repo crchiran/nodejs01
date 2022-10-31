@@ -1,24 +1,25 @@
+#!/usr/bin/env groovy
+
 pipeline {
-    agent any
+
+    agent {
+        docker {
+            image 'node'
+            args '-u root'
+        }
+    }
 
     stages {
         stage('Build') {
             steps {
-                echo 'Building..'
+                echo 'Building...'
+                sh 'npm install'
             }
         }
         stage('Test') {
             steps {
-                echo 'Testing..'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                //sh 'scp index.js root@170.187.228.173:/srv/nodejs01/'
-                sh 'ssh 170.187.228.173'
-                sh 'touch hi.txt'
-                //sh 'sudo chmod +x ./jenkins/scripts/deliver.sh'
-                //sh './jenkins/scripts/deliver.sh'
+                echo 'Testing...'
+                sh 'npm test'
             }
         }
     }
